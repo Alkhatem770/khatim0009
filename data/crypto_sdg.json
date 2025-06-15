@@ -1,0 +1,44 @@
+{
+  "crypto": [
+    {
+      "id": "bitcoin",
+      "symbol": "btc",
+      "name": "Bitcoin",
+      "price": 105451
+    },
+    {
+      "id": "ethereum",
+      "symbol": "eth",
+      "name": "Ethereum",
+      "price": 2534.1
+    },
+    {
+      "id": "tether",
+      "symbol": "usdt",
+      "name": "Tether",
+      "price": 1
+    },
+    {
+      "id": "ripple",
+      "symbol": "xrp",
+      "name": "XRP",
+      "price": 2.17
+    },
+    {
+      "id": "binancecoin",
+      "symbol": "bnb",
+      "name": "BNB",
+      "price": 650.3
+    }
+  ],
+  "sdg": [
+    {
+      "goal": 1,
+      "title": "No Poverty"
+    },
+    {
+      "goal": 2,
+      "title": "Zero Hunger"
+    }
+  ]
+}
