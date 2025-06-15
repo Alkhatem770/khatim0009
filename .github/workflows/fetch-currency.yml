@@ -1,29 +1,32 @@
-const fs = require("fs");
-const fetch = require("node-fetch");
+name: Fetch Currency Rates
 
-const API_URL = "https://open.er-api.com/v6/latest/USD";
+on:
+  schedule:
+    - cron: "0 */3 * * *"  # كل 3 ساعات
+  workflow_dispatch:
 
-async function fetchCurrencyRates() {
-  try {
-    const response = await fetch(API_URL);
-    const data = await response.json();
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    if (!data || !data.rates) {
-      throw new Error("No rates data found");
-    }
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
 
-    const output = {
-      base: data.base_code,
-      time: data.time_last_update_utc,
-      rates: data.rates,
-    };
+      - name: Install dependencies
+        run: npm install node-fetch
 
-    fs.writeFileSync("currency.json", JSON.stringify(output, null, 2));
-    console.log("✅ Currency rates saved to currency.json");
-  } catch (error) {
-    console.error("❌ Failed to fetch currency rates:", error);
-    process.exit(1);
-  }
-}
+      - name: Run currency fetch script
+        run: node fetch-currency.js
 
-fetchCurrencyRates();
+      - name: Commit and push currency.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add currency.json
+          git commit -m "🔄 Update currency rates"
+          git push
