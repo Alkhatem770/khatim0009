@@ -2,12 +2,13 @@ name: Fetch Currency Rates
 
 on:
   schedule:
-    - cron: "0 */3 * * *"  # كل 3 ساعات
+    - cron: "0 */3 * * *" # كل 3 ساعات
   workflow_dispatch:
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
