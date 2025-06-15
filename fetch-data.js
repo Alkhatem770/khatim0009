@@ -1,7 +1,7 @@
 // fetch-data.js
 const fs = require('fs');
 const fetch = require('node-fetch');
-const parse = require('csv-parse/lib/sync');
+const { parse } = require('csv-parse/sync');
 
 async function fetchCryptoData() {
   const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd';
