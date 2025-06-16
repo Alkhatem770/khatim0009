@@ -1,40 +1,61 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const fetch = require("node-fetch");
 
-// ضع هنا دوال جلب البيانات الخاصة بك
-async function fetchCryptoData() {
-  // مثال: إرجاع بيانات وهمية
-  return [{ name: "Bitcoin", price: 70000 }];
-}
-async function fetchSDGfromGoogleSheet() {
-  // مثال: إرجاع بيانات وهمية
-  return [{ goal: "No Poverty", status: "On Track" }];
+// ========== إعداد Google Sheets ==========
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?output=tsv"; // <-- عدله برابطك
+
+// ========== إعداد CoinGecko API ==========
+const COINGECKO_API =
+  "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd";
+
+// ========== دالة لجلب بيانات العملات الرقمية ==========
+async function fetchCryptoPrices() {
+  const res = await fetch(COINGECKO_API);
+  if (!res.ok) throw new Error("فشل في جلب أسعار العملات الرقمية");
+  return await res.json();
 }
 
-async function main() {
+// ========== دالة لجلب سعر الجنيه السوداني من Google Sheets ==========
+async function fetchSDGRate() {
+  const res = await fetch(SHEET_URL);
+  if (!res.ok) throw new Error("فشل في جلب سعر الجنيه السوداني من Google Sheets");
+
+  const tsv = await res.text();
+  const lines = tsv.trim().split("\n");
+  const headers = lines[0].split("\t");
+  const sdgIndex = headers.findIndex((h) => h.toLowerCase().includes("sdg"));
+
+  if (sdgIndex === -1) throw new Error("لم يتم العثور على عمود SDG في Google Sheet");
+
+  const row = lines[1].split("\t");
+  const sdgRate = parseFloat(row[sdgIndex]);
+  return isNaN(sdgRate) ? null : sdgRate;
+}
+
+// ========== حفظ البيانات ==========
+async function saveDataToFile(data) {
+  fs.writeFileSync("data.json", JSON.stringify(data, null, 2));
+}
+
+// ========== تشغيل العملية ==========
+(async () => {
   try {
-    const [crypto, sdg] = await Promise.all([
-      fetchCryptoData(),
-      fetchSDGfromGoogleSheet()
+    const [cryptoData, sdgRate] = await Promise.all([
+      fetchCryptoPrices(),
+      fetchSDGRate(),
     ]);
 
-    const data = {
+    const result = {
       timestamp: new Date().toISOString(),
-      crypto,
-      sdg
+      crypto: cryptoData,
+      sdg: sdgRate,
     };
 
-    const dir = path.join(__dirname, 'data');
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-
-    fs.writeFileSync(path.join(dir, 'crypto_sdg.json'), JSON.stringify(data, null, 2));
-    console.log('✅ تم تحديث البيانات بنجاح');
-  } catch (error) {
-    console.error('❌ فشل في جلب أو حفظ البيانات:', error);
+    await saveDataToFile(result);
+    console.log("✅ تم حفظ البيانات في data.json");
+  } catch (err) {
+    console.error("❌ حدث خطأ:", err.message);
     process.exit(1);
   }
-}
-
-main();
+})();
