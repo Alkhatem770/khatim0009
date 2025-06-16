@@ -24,13 +24,27 @@ async function fetchSDGRate() {
   const tsv = await res.text();
   const lines = tsv.trim().split("\n");
   if (lines.length < 2) throw new Error("البيانات من Google Sheets فارغة أو غير صحيحة.");
+
+  // استخراج رؤوس الأعمدة
   const headers = lines[0].split("\t");
-  const sdgIndex = headers.findIndex((h) => h.toLowerCase().includes("sdg"));
+  const currencyIndex = headers.findIndex((h) => h.toLowerCase().includes("currency"));
+  const rateIndex = headers.findIndex((h) => h.toLowerCase().includes("rate"));
 
-  if (sdgIndex === -1) throw new Error("لم يتم العثور على عمود SDG في Google Sheet");
+  if (currencyIndex === -1 || rateIndex === -1) {
+    throw new Error("لم يتم العثور على أعمدة currency أو rate في Google Sheet");
+  }
 
-  const row = lines[1].split("\t");
-  const sdgRate = parseFloat(row[sdgIndex]);
+  // ابحث عن الصف الذي به SDG
+  let sdgRate = null;
+  for (let i = 1; i < lines.length; i++) {
+    const row = lines[i].split("\t");
+    if (row[currencyIndex] && row[currencyIndex].toUpperCase() === "SDG") {
+      sdgRate = parseFloat(row[rateIndex]);
+      break;
+    }
+  }
+
+  if (sdgRate === null) throw new Error("لم يتم العثور على قيمة SDG في Google Sheet.");
   if (isNaN(sdgRate)) throw new Error("قيمة SDG غير صالحة في Google Sheets.");
   return sdgRate;
 }
