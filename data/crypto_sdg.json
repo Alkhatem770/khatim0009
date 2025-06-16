@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-06-16T00:00:16.064Z",
-  "crypto": [
-    {
-      "name": "Bitcoin",
-      "price": 70000
+  "timestamp": "2025-06-16T05:15:27.693Z",
+  "crypto": {
+    "bitcoin": {
+      "usd": 106367
+    },
+    "ethereum": {
+      "usd": 2575.76
+    },
+    "solana": {
+      "usd": 156.65
     }
-  ],
-  "sdg": [
-    {
-      "goal": "No Poverty",
-      "status": "On Track"
-    }
-  ]
+  },
+  "sdg": 2630
 }
