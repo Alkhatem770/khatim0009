@@ -1,0 +1,81 @@
+import java.util.Properties
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dev.flutter.flutter-gradle-plugin'
+    id 'com.google.gms.google-services' // Firebase plugin
+}
+
+// تحميل بيانات التوقيع من key.properties
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+def flutterMinSdkVersion = project.hasProperty('flutter.minSdkVersion') ? project.property('flutter.minSdkVersion').toInteger() : 23
+
+android {
+    namespace 'com.calculate.currencyplus'
+    compileSdk flutter.compileSdkVersion
+    ndkVersion "27.0.12077973"
+    compileSdk 35
+    buildToolsVersion "34.0.0" // ✅ تم إضافته هنا
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    defaultConfig {
+        applicationId "com.calculate.currencyplus"
+        minSdkVersion flutterMinSdkVersion
+        targetSdk flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.release
+            shrinkResources = true
+            minifyEnabled true
+            crunchPngs = false
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+// filepath: c:\smart_currency\android\app\build.gradle
+dependencies {
+    implementation 'com.google.android.material:material:1.9.0' // Latest version
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+}
+
+// لتفعيل Firebase إن كنت تستخدمه
+apply plugin: 'com.google.gms.google-services'

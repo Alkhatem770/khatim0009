@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 export const main = async () => {
   try {
     // 1. جلب بيانات العملات
-    const currencyRes = await fetch('https://open.er-api.com/v6/latest/USD');
+    const currencyRes = await fetch('https://open.er-api.com/v6/latest/USD', {});
     const currencyData = await currencyRes.json();
 
     // 2. جلب بيانات الذهب
@@ -17,7 +17,7 @@ export const main = async () => {
     const goldData = await goldRes.json();
 
     // 3. جلب العملات الرقمية (مثال: Bitcoin و Ethereum فقط)
-    const cryptoRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
+    const cryptoRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd', {});
     const cryptoData = await cryptoRes.json();
 
     // 4. دمج البيانات
