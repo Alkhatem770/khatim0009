@@ -12,10 +12,9 @@ class GoldScreen extends StatefulWidget {
 }
 
 class _GoldScreenState extends State<GoldScreen> {
-  final String goldApiKey = 'goldapi-fwwkpcsmbfd2pye-io';
-  final String goldApiUrl = 'https://www.goldapi.io/api/XAU/USD';
+  final String goldApiUrl =
+      'https://raw.githubusercontent.com/Alkhatem770/alkhatem000007/main/gold.json';
 
-  // API روابط العملات
   final String currencyApiUrl =
       'https://script.google.com/macros/s/AKfycbzJshgLxR0SOhZwNGWX9Fal8OLCsB_VvbP7sr5NS-zjAij31qK4uvXqNCOnmbyyNuAOZQ/exec';
   final String sdgApiUrl =
@@ -60,7 +59,6 @@ class _GoldScreenState extends State<GoldScreen> {
     double? goldPriceUSD;
 
     if (now - lastUpdated >= 8 * 60 * 60 * 1000) {
-      // تحديث كل 8 ساعات
       goldPriceUSD = await fetchGoldPrice();
       if (goldPriceUSD != null) {
         await prefs.setDouble('gold_price_usd', goldPriceUSD);
@@ -88,17 +86,11 @@ class _GoldScreenState extends State<GoldScreen> {
 
   Future<double?> fetchGoldPrice() async {
     try {
-      final goldRes = await http.get(
-        Uri.parse(goldApiUrl),
-        headers: {
-          'x-access-token': goldApiKey,
-          'Content-Type': 'application/json',
-        },
-      );
+      final goldRes = await http.get(Uri.parse(goldApiUrl));
       if (goldRes.statusCode == 200) {
         final data = json.decode(goldRes.body);
         final price = (data['price'] as num?)?.toDouble();
-        print('Fetched gold price from API: $price');
+        print('Fetched gold price from GitHub: $price');
         return price;
       }
     } catch (e) {
@@ -112,7 +104,6 @@ class _GoldScreenState extends State<GoldScreen> {
 
     if (selectedCurrency == 'SDG') {
       try {
-        // جلب سعر SDG من رابط Google Sheets JSON
         final res = await http.get(Uri.parse(sdgApiUrl));
         if (res.statusCode == 200) {
           final data = json.decode(res.body);
@@ -123,7 +114,6 @@ class _GoldScreenState extends State<GoldScreen> {
       }
     } else if (selectedCurrency != 'USD') {
       try {
-        // جلب أسعار العملات من رابط API العملات
         final res = await http.get(Uri.parse(currencyApiUrl));
         if (res.statusCode == 200) {
           final data = json.decode(res.body);
@@ -133,13 +123,14 @@ class _GoldScreenState extends State<GoldScreen> {
         print('Error fetching currency rate: $e');
       }
     }
+
     final gramPrice = goldPriceUSD / 31.1035;
     final newPrices = <String, double>{};
+
     karatFactors.forEach((karat, factor) {
       newPrices[karat] =
           double.parse((gramPrice * factor * exchangeRate).toStringAsFixed(2));
     });
-
     setState(() {
       prices = newPrices;
       isLoading = false;
