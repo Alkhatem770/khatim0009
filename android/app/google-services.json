@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226593045547",
+    "project_id": "smart-currency-fdc28",
+    "storage_bucket": "smart-currency-fdc28.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226593045547:android:f5258ebecb39a120897e6e",
+        "android_client_info": {
+          "package_name": "com.calculate.currencyplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWr76skKPAeMDyixtyErxQKl40HfAOWGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

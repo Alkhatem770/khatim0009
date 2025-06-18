@@ -1,0 +1,40 @@
+name: smart_currency
+description: A modern currency portfolio app using Flutter.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cloud_firestore: ^5.6.8
+  firebase_core: ^3.13.1
+  shared_preferences: ^2.0.15 # Add the shared_preferences package
+  http: ^1.4.0
+  intl: ^0.20.2
+  csv: ^5.0.0
+  flutter_local_notifications: ^19.2.1
+  google_mobile_ads: ^6.0.0
+  flutter_localizations:
+    sdk: flutter
+  url_launcher: ^6.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.3
+  flutter_lints: ^5.0.0
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/icon/app_icon.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/gold/gold_bar.png
+flutter_intl:
+  enabled: true
