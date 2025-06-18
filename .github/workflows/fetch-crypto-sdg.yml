@@ -23,6 +23,7 @@ jobs:
       - name: Run fetch script
         run: node fetch-data.js
 
+<<<<<<< HEAD
       - name: Commit and push data.json
         run: |
           git config user.name "github-actions[bot]"
@@ -30,3 +31,20 @@ jobs:
           git add data.json
           git commit -m "🔄 Update crypto and SDG data"
           git push
+=======
+      - name: Check for generated file
+        run: ls -l data/
+
+      - name: Commit and push data/crypto_sdg.json
+        run: |
+          if [ -f data/crypto_sdg.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/crypto_sdg.json
+            git commit -m "🔄 Update crypto and SDG data"
+            git push
+          else
+            echo "data/crypto_sdg.json was not created. Skipping commit."
+            exit 1
+          fi
+>>>>>>> temp-fix

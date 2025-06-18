@@ -1,9 +1,24 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "axios": "^1.9.0",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
     "express": "^5.1.0",
+=======
+  "name": "supabase-uploader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "csv-parse": "^5.6.0",
+>>>>>>> temp-fix
     "node-fetch": "^2.7.0"
   }
 }

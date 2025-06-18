@@ -1,16 +1,28 @@
+<<<<<<< HEAD
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.calculate.currencyplus">
 
     <!-- الأذونات -->
+=======
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- إضافة أذونات الإنترنت -->
+>>>>>>> temp-fix
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:label="العملة الذكية"
+<<<<<<< HEAD
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="true">
 
         <!-- AdMob App ID -->
+=======
+        android:icon="@mipmap/ic_launcher">
+        
+        <!-- إضافة AdMob App ID -->
+>>>>>>> temp-fix
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6359760519702309~5507358374" />
@@ -19,6 +31,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
+<<<<<<< HEAD
             android:taskAffinity="com.calculate.currencyplus"
             android:theme="@style/LaunchTheme.SmartCurrency"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -29,19 +42,40 @@
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
 
+=======
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme" />
+            
+>>>>>>> temp-fix
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
         <!-- خاص بـ Flutter -->
+=======
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+>>>>>>> temp-fix
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
 
+<<<<<<< HEAD
     <!-- للسماح للتطبيقات بمعالجة النصوص -->
+=======
+    <!-- Required to query activities that can process text -->
+>>>>>>> temp-fix
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />

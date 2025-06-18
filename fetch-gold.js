@@ -34,4 +34,8 @@ async function fetchGoldPrice() {
   }
 }
 
+<<<<<<< HEAD
 fetchGoldPrice();
+=======
+fetchGoldPrice();
+>>>>>>> temp-fix

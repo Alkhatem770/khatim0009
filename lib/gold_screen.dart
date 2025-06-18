@@ -12,9 +12,16 @@ class GoldScreen extends StatefulWidget {
 }
 
 class _GoldScreenState extends State<GoldScreen> {
+<<<<<<< HEAD
   final String goldApiUrl =
       'https://raw.githubusercontent.com/Alkhatem770/alkhatem000007/main/gold.json';
 
+=======
+  final String goldApiKey = 'goldapi-fwwkpcsmbfd2pye-io';
+  final String goldApiUrl = 'https://www.goldapi.io/api/XAU/USD';
+
+  // API روابط العملات
+>>>>>>> temp-fix
   final String currencyApiUrl =
       'https://script.google.com/macros/s/AKfycbzJshgLxR0SOhZwNGWX9Fal8OLCsB_VvbP7sr5NS-zjAij31qK4uvXqNCOnmbyyNuAOZQ/exec';
   final String sdgApiUrl =
@@ -59,6 +66,10 @@ class _GoldScreenState extends State<GoldScreen> {
     double? goldPriceUSD;
 
     if (now - lastUpdated >= 8 * 60 * 60 * 1000) {
+<<<<<<< HEAD
+=======
+      // تحديث كل 8 ساعات
+>>>>>>> temp-fix
       goldPriceUSD = await fetchGoldPrice();
       if (goldPriceUSD != null) {
         await prefs.setDouble('gold_price_usd', goldPriceUSD);
@@ -86,11 +97,25 @@ class _GoldScreenState extends State<GoldScreen> {
 
   Future<double?> fetchGoldPrice() async {
     try {
+<<<<<<< HEAD
       final goldRes = await http.get(Uri.parse(goldApiUrl));
       if (goldRes.statusCode == 200) {
         final data = json.decode(goldRes.body);
         final price = (data['price'] as num?)?.toDouble();
         print('Fetched gold price from GitHub: $price');
+=======
+      final goldRes = await http.get(
+        Uri.parse(goldApiUrl),
+        headers: {
+          'x-access-token': goldApiKey,
+          'Content-Type': 'application/json',
+        },
+      );
+      if (goldRes.statusCode == 200) {
+        final data = json.decode(goldRes.body);
+        final price = (data['price'] as num?)?.toDouble();
+        print('Fetched gold price from API: $price');
+>>>>>>> temp-fix
         return price;
       }
     } catch (e) {
@@ -104,6 +129,10 @@ class _GoldScreenState extends State<GoldScreen> {
 
     if (selectedCurrency == 'SDG') {
       try {
+<<<<<<< HEAD
+=======
+        // جلب سعر SDG من رابط Google Sheets JSON
+>>>>>>> temp-fix
         final res = await http.get(Uri.parse(sdgApiUrl));
         if (res.statusCode == 200) {
           final data = json.decode(res.body);
@@ -114,6 +143,10 @@ class _GoldScreenState extends State<GoldScreen> {
       }
     } else if (selectedCurrency != 'USD') {
       try {
+<<<<<<< HEAD
+=======
+        // جلب أسعار العملات من رابط API العملات
+>>>>>>> temp-fix
         final res = await http.get(Uri.parse(currencyApiUrl));
         if (res.statusCode == 200) {
           final data = json.decode(res.body);
@@ -123,14 +156,23 @@ class _GoldScreenState extends State<GoldScreen> {
         print('Error fetching currency rate: $e');
       }
     }
+<<<<<<< HEAD
 
     final gramPrice = goldPriceUSD / 31.1035;
     final newPrices = <String, double>{};
 
+=======
+    final gramPrice = goldPriceUSD / 31.1035;
+    final newPrices = <String, double>{};
+>>>>>>> temp-fix
     karatFactors.forEach((karat, factor) {
       newPrices[karat] =
           double.parse((gramPrice * factor * exchangeRate).toStringAsFixed(2));
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> temp-fix
     setState(() {
       prices = newPrices;
       isLoading = false;

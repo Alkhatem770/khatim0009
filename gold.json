@@ -1,6 +1,10 @@
 {
   "metal": "XAU",
   "currency": "USD",
+<<<<<<< HEAD
   "price": 1000.0,
+=======
+  "price": 3438.56,
+>>>>>>> temp-fix
   "timestamp": 1750037881
 }
