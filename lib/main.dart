@@ -59,11 +59,7 @@ class _CurrencyAppState extends State<CurrencyApp> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId:
-<<<<<<< HEAD
           'ca-app-pub-6359760519702309/8010559750', // Your real Ad Unit ID
-=======
-          'ca-app-pub-6359760519702309/3569033708', // Your real Ad Unit ID
->>>>>>> temp-fix
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -428,11 +424,7 @@ class _HomePageState extends State<HomePage> {
 
   void _loadInterstitialAd() {
     InterstitialAd.load(
-<<<<<<< HEAD
       adUnitId: 'ca-app-pub-6359760519702309/8010559750',
-=======
-      adUnitId: 'ca-app-pub-6359760519702309/3569033708',
->>>>>>> temp-fix
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
@@ -901,11 +893,7 @@ class _MorePageState extends State<MorePage> {
 
   void _loadInterstitialAd() {
     InterstitialAd.load(
-<<<<<<< HEAD
       adUnitId: 'ca-app-pub-6359760519702309/8010559750',
-=======
-      adUnitId: 'ca-app-pub-6359760519702309/3569033708',
->>>>>>> temp-fix
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {

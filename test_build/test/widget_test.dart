@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-<<<<<<< HEAD
 // Define a basic MyApp class if it doesn't exist in main.dart
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,9 +22,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-=======
-import 'package:test_build/main.dart';
->>>>>>> temp-fix
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

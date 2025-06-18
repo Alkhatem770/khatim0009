@@ -1,28 +1,60 @@
 {
-<<<<<<< HEAD
-  "timestamp": "2025-06-16T06:47:59.168Z",
-  "crypto": {
-    "bitcoin": {
-      "usd": 106686
-    },
-    "ethereum": {
-      "usd": 2615.17
-    },
-    "solana": {
-      "usd": 156.7
-=======
-  "timestamp": "2025-06-18T00:56:53.439Z",
-  "crypto": {
-    "bitcoin": {
-      "usd": 104681
-    },
-    "ethereum": {
-      "usd": 2521.05
-    },
-    "solana": {
-      "usd": 147.83
->>>>>>> temp-fix
+  "name": "Fetch Crypto and SDG Data",
+  "on": {
+    "schedule": [
+      {
+        "cron": "*/5 * * * *"
+      }
+    ],
+    "workflow_dispatch": true
+  },
+  "jobs": {
+    "fetch": {
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "name": "Checkout code",
+          "uses": "actions/checkout@v3"
+        },
+        {
+          "name": "Set up Node.js",
+          "uses": "actions/setup-node@v3",
+          "with": {
+            "node-version": 20
+          }
+        },
+        {
+          "name": "Install dependencies",
+          "run": "npm install node-fetch csv-parse"
+        },
+        {
+          "name": "Run fetch script",
+          "run": "node fetch-data.js"
+        },
+        {
+          "name": "Check for generated file",
+          "run": "ls -l data/"
+        },
+        {
+          "name": "Commit and push data/crypto_sdg.json",
+          "run": "if [ -f data/crypto_sdg.json ]; then git config user.name \"github-actions[bot]\"; git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"; git add data/crypto_sdg.json; git commit -m \"🔄 Update crypto and SDG data\"; git push; else echo \"data/crypto_sdg.json was not created. Skipping commit.\"; exit 1; fi"
+        }
+      ]
     }
   },
-  "sdg": 2630
+  "data": {
+    "timestamp": "2025-06-18T00:56:53.439Z",
+    "crypto": {
+      "bitcoin": {
+        "usd": 104681
+      },
+      "ethereum": {
+        "usd": 2521.05
+      },
+      "solana": {
+        "usd": 147.83
+      }
+    },
+    "sdg": 2630
+  }
 }

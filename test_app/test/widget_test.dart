@@ -8,7 +8,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:test_app/main.dart';
+import '../lib/main.dart';
+
+// Ensure that MyApp is defined in main.dart as follows:
+// class MyApp extends StatelessWidget { ... }
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
