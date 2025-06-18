@@ -13,7 +13,7 @@ class GoldScreen extends StatefulWidget {
 
 class _GoldScreenState extends State<GoldScreen> {
   final String goldApiUrl =
-      'https://raw.githubusercontent.com/Alkhatem770/alkhatem000007/main/gold.json';
+      'https://raw.githubusercontent.com/Alkhatem770/khatim0009/refs/heads/main/gold.json';
 
   final String currencyApiUrl =
       'https://script.google.com/macros/s/AKfycbzJshgLxR0SOhZwNGWX9Fal8OLCsB_VvbP7sr5NS-zjAij31qK4uvXqNCOnmbyyNuAOZQ/exec';
